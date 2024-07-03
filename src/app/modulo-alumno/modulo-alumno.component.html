@@ -1,0 +1,91 @@
+<div class="container mt-4">
+  <h2 class="text-center">Gestión de ModuloAlumno</h2>
+
+  <div class="row">
+    <div class="col-md-8">
+      <h3>Lista de ModuloAlumnos</h3>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre del Alumno</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
+            <th>Nombre del Módulo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ma of moduloAlumnos">
+            <td>{{ ma.idModuloAlumno }}</td>
+            <td>{{ ma.alumno.nombre }}</td>
+            <td>{{ ma.alumno.apellidoP }}</td>
+            <td>{{ ma.alumno.apellidoM }}</td>
+            <td>{{ ma.modulo.nombre }}</td>
+            <td>
+              <button class="btn btn-primary btn-sm" (click)="getModuloAlumno(ma.idModuloAlumno)">
+                <i class="bi bi-pencil"></i> Editar
+              </button>
+              <button class="btn btn-danger btn-sm" (click)="deleteModuloAlumno(ma.idModuloAlumno)">
+                <i class="bi bi-trash"></i> Eliminar
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-md-4">
+      <h3>Crear/Actualizar ModuloAlumno</h3>
+      <form (ngSubmit)="createModuloAlumno()">
+        <div class="form-group">
+          <label for="expediente">Expediente del Alumno:</label>
+          <input type="number" class="form-control" id="expediente" [(ngModel)]="moduloAlumno.alumno.expediente" name="expediente" required>
+        </div>
+
+        <div class="form-group">
+          <label for="nombreAlumno">Nombre del Alumno:</label>
+          <input type="text" class="form-control" id="nombreAlumno" [(ngModel)]="moduloAlumno.alumno.nombre" name="nombreAlumno" required>
+        </div>
+
+        <div class="form-group">
+          <label for="apellidoP">Apellido Paterno:</label>
+          <input type="text" class="form-control" id="apellidoP" [(ngModel)]="moduloAlumno.alumno.apellidoP" name="apellidoP" required>
+        </div>
+
+        <div class="form-group">
+          <label for="apellidoM">Apellido Materno:</label>
+          <input type="text" class="form-control" id="apellidoM" [(ngModel)]="moduloAlumno.alumno.apellidoM" name="apellidoM" required>
+        </div>
+
+        <div class="form-group">
+          <label for="fechaNac">Fecha de Nacimiento:</label>
+          <input type="date" class="form-control" id="fechaNac" [(ngModel)]="moduloAlumno.alumno.fechaNac" name="fechaNac" required>
+        </div>
+
+        <div class="form-group form-check">
+          <input type="checkbox" class="form-check-input" id="delegado" [(ngModel)]="moduloAlumno.alumno.delegado" name="delegado">
+          <label class="form-check-label" for="delegado">Delegado</label>
+        </div>
+
+        <div class="form-group">
+          <label for="codigoModulo">Código del Módulo:</label>
+          <input type="number" class="form-control" id="codigoModulo" [(ngModel)]="moduloAlumno.modulo.codigo" name="codigoModulo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="nombreModulo">Nombre del Módulo:</label>
+          <input type="text" class="form-control" id="nombreModulo" [(ngModel)]="moduloAlumno.modulo.nombre" name="nombreModulo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="rfcProfesor">RFC del Profesor:</label>
+          <input type="text" class="form-control" id="rfcProfesor" [(ngModel)]="moduloAlumno.modulo.profesor.rfc" name="rfcProfesor" required>
+        </div>
+
+        <button type="submit" class="btn btn-success mt-2">Guardar</button>
+        <button type="button" class="btn btn-warning mt-2" (click)="resetForm()">Limpiar</button>
+      </form>
+    </div>
+  </div>
+</div>
